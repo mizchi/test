@@ -1,6 +1,7 @@
 {
   "name": "@mizchi/testio",
-  "version": "0.0.1",
+  "type": "module",
+  "version": "0.0.2",
   "main": "dist/testio.js",
   "types": "types/index.d.ts",
   "scripts": {
