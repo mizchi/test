@@ -1,56 +1,60 @@
-# @mizchi/idb-ops
+# @mizchi/testio
 
-simple and lightweight idb wrapper focused on bulk update.
+Deadly simple test runner with console stub.  (535byte with terser)
 
-```bash
-$ npm install @mizchi/idb-ops --save
-# or
-$ yarn add @mizchi/idb-ops
-```
+Support node and deno.
 
 ## How to use
 
+Put this code and use it.
+
 ```ts
-import { bulkMutate, iter, openDB } from "@mizchi/idb-ops";
+// use your own assert
+import assert from "assert";
+import { test, run, cancel, cancelAll } from "@mizchi/testio";
 
-async function main() {
-  const database = await openDB(
-    // db
-    "testdb",
-    // version
-    1,
-    // objectStore names
-    ["t1", "t2", "t3"],
-    // onUpgrade
-    (oldVersion, newVersion, database) => {
-      console.log("upgraded", oldVersion, newVersion, database);
-    }
-  );
-  // bulk update
-  await bulkMutate(database, [
-    ["t1", "set", "a", "x"],
-    ["t1", "set", "a2", "xxxx"],
-    ["t2", "set", "b", "y"],
-    ["t3", "set", "c", "z"],
-    ["t1", "delete", "x"],
-  ]);
+test("test1", () => {
+  console.log("do not show this message on success");
+  assert.equal(1, 1);
+});
 
-  // async iterator
-  for await (const [key, value] of iter(database, "t1")) {
-    console.log("t1::", key, value);
-  }
-}
+test("test2", () => {
+  assert.equal(1, 2);
+});
+cancel(); // cancel last test: test2
+// cancelAll(); // cancel all tests
 
-main().catch(console.error);
+test("async fail", async () => {
+  console.log("show me on fail");
+  return Promise.reject(new Error("stop"));
+});
+
+// report fail case logs
+run({ stub: true, stopOnFail: false }) // default option
+  .then((isSuccess) => !isSuccess && process.exit(1));
+  .catch(console.error);
 ```
 
-## Related
+And run with ts runner.
 
-- [kvs/packages/indexeddb at master · azu/kvs](https://github.com/azu/kvs/tree/master/packages/indexeddb)
-- [treojs/idb-batch: Perform batch operation on IndexedDB](https://github.com/treojs/idb-batch)
+```bash
+$ npx ts-node -T -O '{"module":"commonjs"}' test.ts
+$ npx esbuild-node test.ts
+$ deno run test.ts
+```
+
+Result
+
+```
+=== PASS(test1)
+=== FAIL(async fail)
+  Error: stop
+    at /Users/mizchi/zatsu/testio.ts:273:25
+    at run (/Users/mizchi/zatsu/testio.ts:208:13)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+(async fail) show me on fail
+```
 
 ## LICENSE
 
 MIT
-
-
