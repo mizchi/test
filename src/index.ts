@@ -24,7 +24,7 @@ export const run = async ({
 }: {
   stub?: boolean;
   stopOnFail?: boolean;
-}): Promise<boolean> => {
+} = {}): Promise<boolean> => {
   let isSuccess = true;
   for (const [name, testFn] of _tests) {
     stub && _stub(name);
