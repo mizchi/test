@@ -6,7 +6,7 @@ export default defineConfig({
     lib: process.env.LIB && {
       entry: "src/index",
       formats: ["es"],
-      fileName: () => `idb-ops.js`,
+      fileName: () => `testio.js`,
     },
   },
 });
