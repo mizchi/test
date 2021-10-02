@@ -1,18 +1,22 @@
 import { defineConfig } from "vite";
 
 export default defineConfig({
+  define: {
+    "process.env.NODE_ENV": JSON.stringify("production"),
+    "require.main === module": JSON.stringify(false),
+    "require.main": JSON.stringify(null),
+  },
   build: {
-    target: "es2019",
+    target: "es2020",
     lib: process.env.LIB && {
       entry: "src/index",
       formats: ["es", "cjs"],
       fileName: (format) => {
-        console.log("format", format);
         if (format === "cjs") {
-          return `testio.cjs`;
+          return `index.cjs`;
         }
         if (format === "es") {
-          return `testio.js`;
+          return `index.js`;
         }
         return "";
       },
