@@ -1,5 +1,5 @@
 {
-  "name": "@mizchi/testio",
+  "name": "@mizchi/test",
   "version": "0.1.0",
   "module": "dist/index.js",
   "main": "dist/index.cjs",

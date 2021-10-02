@@ -71,7 +71,7 @@ export const cancelAll = () => (_tests.length = 0);
 export const cancel = () => _tests.pop();
 export const test = (...t: TestCase) => {
   if (_freezed) {
-    console.warn("[testio] Tests are frozen");
+    console.warn("[test] Tests are frozen");
     return;
   }
   _tests.push(t);
@@ -119,7 +119,7 @@ export const run = async ({
   _release();
   if (isMain && hasError) {
     // process.exit(1);
-    throw new Error("[testio] exit with error");
+    throw new Error("[test] exit with error");
   }
 };
 

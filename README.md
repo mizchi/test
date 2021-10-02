@@ -1,4 +1,4 @@
-# @mizchi/testio
+# @mizchi/test
 
 Simple test runner to run test standalone with console stub.
 
@@ -16,7 +16,7 @@ Support `node` and `deno`.
 ## How to use
 
 ```bash
-yarn add @mizchi/testio esbuild esbuild-register --dev
+yarn add @mizchi/test esbuild esbuild-register --dev
 # esbuild(-register) is optional for typescript
 ```
 
@@ -30,7 +30,7 @@ export function add(a: number, b: number) {
   return a + b;
 }
 
-import { test, run, is } from "@mizchi/testio";
+import { test, run, is } from "@mizchi/test";
 test("test1", () => {});
 run();
 ```
@@ -53,8 +53,8 @@ export function add(a: number, b: number) {
   return a + b;
 }
 
-/* === testio start === */
-import { test, run, is, err } from "@mizchi/testio";
+/* === test start === */
+import { test, run, is, err } from "@mizchi/test";
 const isMain = require.main === module;
 if (process.env.NODE_ENV === "test") {
 // or main only.
@@ -108,7 +108,7 @@ or [DefinePlugin | webpack](https://webpack.js.org/plugins/define-plugin/) and o
 - `err(fn: () => void | Promise<void>): void`: catches `throw`. `fn` should throw.
 
 ```ts
-import {is, err, ANY} from "@mizchi/testio";
+import {is, err, ANY} from "@mizchi/test";
 is(false, ANY);
 is(1, 1);
 is({ a: 1 }, { a: 1 });
@@ -134,8 +134,8 @@ In complex case, use your favorite assertion library.
 ### Node: run with dependency tests
 
 ```ts
-/* === testio start === */
-import { run, test } from "@mizchi/testio";
+/* === test start === */
+import { run, test } from "@mizchi/test";
 const isMain = require.main === module;
 if (process.env.NODE_ENV === "test") {
   test("ok", () => {
@@ -152,8 +152,8 @@ I reccomend this and run all tests by eg. `src/index.ts`.
 with `cancelAll()` before run.
 
 ```ts
-/* === testio start === */
-import { run, test, cancelAll } from "@mizchi/testio";
+/* === test start === */
+import { run, test, cancelAll } from "@mizchi/test";
 const isMain = require.main === module;
 if (process.env.NODE_ENV === "test") {
   cancelAll();
@@ -171,8 +171,8 @@ It's helpful hack if you want `with dependency` mode and cancel others.
 **CAUTION** I DO NOT reccomend to leave test codes on `deno` because it causes runtime cost on any case. If you want to use, comment out is needed.
 
 ```ts
-/* === testio start === */
-import { run, test } from "http://cdn.skypack.dev/@mizchi/testio";
+/* === test start === */
+import { run, test } from "http://cdn.skypack.dev/@mizchi/test";
 const isMain = import.meta.main;
 if (isMain) {
   test("ok", () => {
