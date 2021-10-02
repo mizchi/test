@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "LIB=1 vite build && yarn tsc",
+    "prepublishOnly": "yarn build",
     "test": "tsc -p . --noEmit --emitDeclarationOnly false && node -r esbuild-register test.ts"
   },
   "devDependencies": {
