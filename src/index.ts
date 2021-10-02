@@ -187,7 +187,6 @@ if (process.env.NODE_ENV === "test" && isMain) {
     err(() => is(null, [1, 2]));
     err(() => is([1, 2, 1], [1, 3]));
     err(() => is({ a: { b: 1 } }, { a: { b: 2 } }));
-    is({ a: { b: 1 } }, { a: { b: 2 } });
   });
   run({ prefix: "self", isMain, stub: true, stopOnFail: false }) // default option
     .then((isSuccess) => !isSuccess && process.exit(1))

@@ -6,16 +6,14 @@ Support node and deno.
 
 ## How to use
 
-Put this code and use it.
-
 ```ts
 // use your own assert
-import assert from "assert";
-import { test, run, cancel, cancelAll } from "@mizchi/testio";
+// import assert from "assert";
+import { test, run, cancel, cancelAll, is, err } from "@mizchi/testio";
 
 test("test1", () => {
   console.log("do not show this message on success");
-  assert.equal(1, 1);
+  is(1, 1);
 });
 
 test("test2", () => {
@@ -30,7 +28,8 @@ test("async fail", async () => {
 });
 
 // report fail case logs
-run({ stub: true, stopOnFail: false }) // default option
+const isMain = require.main === module;
+run({ isMain }) // default option
   .then((isSuccess) => !isSuccess && process.exit(1));
   .catch(console.error);
 ```
