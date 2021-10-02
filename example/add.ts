@@ -13,7 +13,7 @@ export function add(a: number, b: number) {
   }
 */
 
-import { test, run, is, err } from "../src/index";
+import { test, run, is, err } from "@mizchi/test";
 const isMain = require.main === module;
 if (process.env.NODE_ENV === "test") {
   test("add", () => {

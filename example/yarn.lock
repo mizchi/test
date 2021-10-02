@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@mizchi/testio@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@mizchi/testio/-/testio-0.0.6.tgz#6ccdb725bb23a256272b1c4a81df40c7f9229252"
-  integrity sha512-E8B/AH99Awmyp5g2Mf6VOdjt4i9ewjIbN/Auk6xlqSHdqueGd/QymSHqoubQJOGjkIhmAZz2q/FIsZjzqyBKIw==
+"@mizchi/test@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@mizchi/test/-/test-0.1.0.tgz#df025faeefe6137d61b9794f07a96b3ff2e65a3f"
+  integrity sha512-xzA8KixTLm/mNpki/dcTqktbPBcLbvTLVynv0EWvSiI43z2JwpjZkObB0TLlFX/pJhvZGXgqvWotsk6j/5JsFA==
 
 esbuild-android-arm64@0.13.3:
   version "0.13.3"

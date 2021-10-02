@@ -156,7 +156,7 @@ with `cancelAll()` before run.
 import { run, test, cancelAll } from "@mizchi/test";
 const isMain = require.main === module;
 if (process.env.NODE_ENV === "test") {
-  cancelAll();
+  isMain && cancelAll();
   test("ok", () => {
     // write here
   });
