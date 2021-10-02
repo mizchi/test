@@ -9,4 +9,10 @@ export default defineConfig({
     // deno
     "import.meta.main": JSON.stringify(false),
   },
+  build: {
+    lib: {
+      entry: "index",
+      formats: ["es"],
+    },
+  },
 });
