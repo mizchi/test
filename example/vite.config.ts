@@ -3,14 +3,10 @@ import { defineConfig } from "vite";
 export default defineConfig({
   define: {
     "process.env.NODE_ENV": JSON.stringify("production"),
+    // node
     "require.main === module": JSON.stringify(false),
-  },
-  build: {
-    target: "es2019",
-    lib: {
-      entry: "src/index",
-      formats: ["es", "cjs"],
-      fileName: (format) => ({ cjs: "index.cjs", es: "index.js" }[format]),
-    },
+    "require.main == module": JSON.stringify(false),
+    // deno
+    "import.meta.main": JSON.stringify(false),
   },
 });
