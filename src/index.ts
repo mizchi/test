@@ -44,7 +44,12 @@ const format = (v: any) =>
     .map((line) => `  ${line}`)
     .join("\n");
 
-export const is = (left: any, right: any, paths: string[] = []): void => {
+export const is = (
+  left: any,
+  right: any,
+  paths: string[] = ["$"],
+  root: any = [left, right]
+): void => {
   if (right === ANY) {
     return;
   }
@@ -54,14 +59,14 @@ export const is = (left: any, right: any, paths: string[] = []): void => {
   if (right !== null && rType === "object") {
     for (const key in right) {
       right.hasOwnProperty(key) &&
-        is(left?.[key], right?.[key], [...paths, key]);
+        is(left?.[key], right?.[key], [...paths, key], root);
     }
     return;
   }
   throw new Error(
-    `Not match(${paths.join(".") || "."})\n[left]:\n${format(
-      left
-    )}\n[right]:\n${format(right)}`
+    `Not match at ${paths.join(".")}\n[left]:\n${format(
+      root[0]
+    )}\n[right]:\n${format(root[1])}`
   );
 };
 
@@ -156,6 +161,10 @@ if (process.env.NODE_ENV === "test") {
       }
     }
   });
+
+  // test("throws:any", () => {
+  //   is({ a: 1 }, { a: 1, b: 2 });
+  // });
 
   test("throws:async", async () => {
     await err(async () => {
